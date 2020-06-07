@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+	<!-- 
+		
+		web.xml : Tomcat 구동과 관련된 설정, 프로젝트 구동은 web.xml에서 시작 
+	
+	-->
+
+	<!-- 1. 가장 먼저 프로젝트 구동되는 'Context Listener' 
+		-'contextConfigLocation'라는 파라미터를 사용하면 ContextLoader가 로드할 수 있는 설정파일을 여러개 작성이 가능하다
+		만약 파라미터를 사용하지 않으면 web.xml이 default파일로 spring설정 파일이 된다.
+		-설정된 root-context.xml에 정의된 객체(bean)들이 스프링의 영역(context) 안에 생성되고 객체들 간의 의존성이 처리된다
+		
+		<context-param> : 사용자가 직접 컨트롤 하는 XML파일을 지정
+		
+		
+		2. 웹 어플리케이션 구동 시 같이 동작하므로, 프로젝트를 실행하면 가장 먼저 로그를 출력한다 
+		INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+		INFO : org.springframework.web.context.ContextLoader - Root WebApplicationContext initialized in 485 ms 
+		
+		<listener> : 스프링 설정 정보를 읽는다
+		
+		
+		3. 스프링MVC의 DispatcherServlet 설정 및 동작 
+		-servlet-context.xml에 정의된 객체들은 기존(root-context.xml)에 만들어진 객체들과 같이 연동되게 된다
+		
+		<servlet> : 모든 요청과 응답을 처리해 주는 것이 서블릿인데 스프링에서는 이를 'DispatcherServlet' 처리한다	
+	-->
+	
+	<!-- 1 -->
+	<context-param>	
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+	</context-param>
+	
+	<!-- 2 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- 3 -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet> 
+		
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+</web-app>
