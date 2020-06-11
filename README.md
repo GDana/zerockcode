@@ -4,7 +4,7 @@
 <br>
 
 <div align=center>
-![k012534261_1](https://user-images.githubusercontent.com/35926413/84367245-e7669200-ac0e-11ea-94c0-9a4449f05569.jpg)
+<img src="https://user-images.githubusercontent.com/35926413/84367245-e7669200-ac0e-11ea-94c0-9a4449f05569.jpg">
 </div>
 
 - 저자 : 구멍가게 코딩단, 남가람북스, 2018.09.13
